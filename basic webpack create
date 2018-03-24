@@ -1,0 +1,92 @@
+mkdir example && cd example
+
+// -y fills default values
+npm init -y
+
+npm install --save-dev webpack
+
+npm install --save-dev webpack-cli
+
+   //open package.json and:
+   //delete:
+       "main": "index.js",
+   //add:
+       "private": true,
+
+//run test
+npm test 
+
+       //Output:
+
+       //> test@1.0.0 test /media/igor/FCCE1C08CE1BBA3A/Programm/test
+       //> echo "Error: no test specified" && exit 1
+
+       //Error: no test specified
+       //npm ERR! Test failed.  See above for more details.
+
+   //open package.json and:
+   //add:
+      "scripts": {
+         "dev": "webpack --mode development ./src/index.js --output ./dist/main.js",
+         "build": "webpack --mode production ./src/index.js --output ./dist/main.js",
+       }
+
+//to run DEVELOPMENT mode 
+npm run dev
+
+   //main.js was created for development
+
+//to run PRODUCTION mode 
+npm run build
+
+   //main.js was created for production (minified)
+
+
+mkdir dist && cd dist/ && touch index.html && cd ..
+
+subl .
+    
+   //redact index.html (now is empty)
+   //input in the end of body:
+   //       <script src="bundle.js"></script>
+
+mkdir src/ && cd src/ && touch index.js
+
+mkdir css/ && cd css/ && touch style.css && cd ..
+
+   //redact style.css if needed
+
+mkdir img/ && mkdir db/ && cd ..
+
+    //add images and db files if needed
+
+//create webpack.config.js
+
+touch webpack.config.js
+
+//Using webpack-dev-server
+npm install --save-dev webpack-dev-server
+
+//add following to webpack.config.js
+
+    devServer: {
+      contentBase: path.join(__dirname, "dist"),
+      compress: true,
+      port: 9000
+    }
+//add a script to run the dev server as well in package.json
+"scripts": {
+  "start": "webpack-dev-server --open",
+}
+
+
+
+
+//to init webpack watch add in package.json:
+  
+  "scripts": {
+    "watch": "webpack --watch",
+  }
+
+
+
